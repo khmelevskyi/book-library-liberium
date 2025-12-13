@@ -1,6 +1,7 @@
 """
 Business logic services for Loan operations.
 """
+
 from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.utils import timezone
@@ -34,8 +35,9 @@ class LoanService:
         # Check if user already has an active loan for this book
         active_loan = Loan.objects.filter(user=user, book=book, returned_at__isnull=True).first()
         if active_loan:
-            raise ValueError(f'You already have an active loan for "{book.title}".'
-                             'Please return it first.')
+            raise ValueError(
+                f'You already have an active loan for "{book.title}".' "Please return it first."
+            )
 
         # Check if book is available
         if not book.is_available:
@@ -44,7 +46,7 @@ class LoanService:
         # Create loan and mark book as unavailable
         loan = Loan.objects.create(user=user, book=book)
         book.is_available = False
-        book.save(update_fields=['is_available'])
+        book.save(update_fields=["is_available"])
 
         return loan
 
@@ -71,9 +73,9 @@ class LoanService:
 
         # Mark loan as returned and make book available
         loan.returned_at = timezone.now()
-        loan.save(update_fields=['returned_at'])
+        loan.save(update_fields=["returned_at"])
 
         book.is_available = True
-        book.save(update_fields=['is_available'])
+        book.save(update_fields=["is_available"])
 
         return loan

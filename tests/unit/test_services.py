@@ -1,8 +1,10 @@
 """
 Unit tests for services.
 """
-import pytest
+
 from django.contrib.auth import get_user_model
+
+import pytest
 
 from books.models import Book
 from loans.services import LoanService
@@ -28,14 +30,14 @@ class TestLoanService:
     @pytest.mark.django_db
     def test_borrow_unavailable_book(self, user: User, unavailable_book: Book) -> None:
         """Test borrowing an unavailable book."""
-        with pytest.raises(ValueError, match='not available'):
+        with pytest.raises(ValueError, match="not available"):
             LoanService.borrow_book(user=user, book=unavailable_book)
 
     @pytest.mark.django_db
     def test_borrow_same_book_twice(self, user: User, book: Book) -> None:
         """Test borrowing the same book twice."""
         LoanService.borrow_book(user=user, book=book)
-        with pytest.raises(ValueError, match='already have an active loan'):
+        with pytest.raises(ValueError, match="already have an active loan"):
             LoanService.borrow_book(user=user, book=book)
 
     @pytest.mark.django_db
@@ -54,7 +56,7 @@ class TestLoanService:
     @pytest.mark.django_db
     def test_return_book_without_loan(self, user: User, book: Book) -> None:
         """Test returning a book without an active loan."""
-        with pytest.raises(ValueError, match='do not have an active loan'):
+        with pytest.raises(ValueError, match="do not have an active loan"):
             LoanService.return_book(user=user, book=book)
 
     @pytest.mark.django_db
@@ -62,5 +64,5 @@ class TestLoanService:
         """Test returning a book that was already returned."""
         LoanService.borrow_book(user=user, book=book)
         LoanService.return_book(user=user, book=book)
-        with pytest.raises(ValueError, match='do not have an active loan'):
+        with pytest.raises(ValueError, match="do not have an active loan"):
             LoanService.return_book(user=user, book=book)

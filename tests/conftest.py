@@ -1,8 +1,10 @@
 """
 Pytest configuration and fixtures.
 """
-import pytest
+
 from django.contrib.auth import get_user_model
+
+import pytest
 from rest_framework.test import APIClient
 
 from books.models import Book
@@ -20,9 +22,9 @@ def api_client() -> APIClient:
 def user() -> User:
     """Create a regular user."""
     return User.objects.create_user(
-        username='testuser',
-        email='test@example.com',
-        password='testpass123',
+        username="testuser",
+        email="test@example.com",
+        password="testpass123",
     )
 
 
@@ -30,9 +32,9 @@ def user() -> User:
 def admin_user() -> User:
     """Create an admin user."""
     return User.objects.create_user(
-        username='admin',
-        email='admin@example.com',
-        password='adminpass123',
+        username="admin",
+        email="admin@example.com",
+        password="adminpass123",
         is_staff=True,
         is_superuser=True,
     )
@@ -56,9 +58,9 @@ def admin_client(api_client: APIClient, admin_user: User) -> APIClient:
 def book() -> Book:
     """Create a book."""
     return Book.objects.create(
-        title='Test Book',
-        author='Test Author',
-        isbn='1234567890',
+        title="Test Book",
+        author="Test Author",
+        isbn="1234567890",
         page_count=100,
         is_available=True,
     )
@@ -68,9 +70,9 @@ def book() -> Book:
 def unavailable_book() -> Book:
     """Create an unavailable book."""
     return Book.objects.create(
-        title='Unavailable Book',
-        author='Test Author',
-        isbn='0987654321',
+        title="Unavailable Book",
+        author="Test Author",
+        isbn="0987654321",
         page_count=200,
         is_available=False,
     )

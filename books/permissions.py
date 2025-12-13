@@ -1,6 +1,7 @@
 """
 Custom permissions for the books app.
 """
+
 from rest_framework import permissions
 
 

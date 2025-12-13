@@ -1,6 +1,7 @@
 """
 Views for Loan API endpoints.
 """
+
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
@@ -15,13 +16,14 @@ class LoanViewSet(viewsets.ReadOnlyModelViewSet):
     list: GET /loans/ - List all loans for the authenticated user
     retrieve: GET /loans/<id>/ - Get loan details
     """
+
     serializer_class = LoanSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         """Return loans for the authenticated user only."""
         # Handle Swagger schema generation
-        if getattr(self, 'swagger_fake_view', False):
+        if getattr(self, "swagger_fake_view", False):
             return Loan.objects.none()
 
         # Check if user is authenticated (not AnonymousUser)
