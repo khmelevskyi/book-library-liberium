@@ -60,7 +60,7 @@ book-library-liberium/
 
 ### Prerequisites
 
-- Python 3.12+
+- Python 3.13
 - PostgreSQL 15+ (or SQLite for local development)
 - Docker and Docker Compose (optional)
 
@@ -479,4 +479,3 @@ This project is licensed under the MIT License.
 - [Swagger Documentation](http://localhost:8000/swagger/)
 - [ReDoc Documentation](http://localhost:8000/redoc/)
 - [Admin Panel](http://localhost:8000/admin/)
-
