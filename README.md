@@ -1,4 +1,4 @@
-# 📚 Library Management System API
+# 📚 Liberium - A Library Management System with API
 
 A production-ready Django REST Framework API for managing a library system with user authentication, book management, and loan tracking.
 
@@ -92,7 +92,7 @@ To set up your PostgreSQL database, run the following commands:
    \q
    ```
 
-> **Note:** Remember to update your `.env` file or Django settings with the database credentials you just created.
+> **Note:** Remember to update your `.env` file with the database credentials you just created.
 
 ### Local Development Setup
 
@@ -363,16 +363,18 @@ Create a `.env` file based on `.env.example`:
 
 ```env
 # Django Settings
-SECRET_KEY=your-secret-key-here
-DEBUG=True
+SECRET_KEY=django-insecure-change-me-in-production
 ALLOWED_HOSTS=localhost,127.0.0.1
-
-# Database Settings
-DB_NAME=library_db
-DB_USER=postgres
-DB_PASSWORD=postgres
+DB_NAME=book_library_liberium
+DB_USER=liberium_user
+DB_PASSWORD=1111
 DB_HOST=localhost
 DB_PORT=5432
+
+# Database Settings
+POSTGRES_DB=book_library_liberium
+POSTGRES_USER=liberium_user
+POSTGRES_PASSWORD=1111
 
 # Production Settings
 SECURE_SSL_REDIRECT=False
@@ -382,14 +384,13 @@ SECURE_SSL_REDIRECT=False
 
 ### Production Checklist
 
-1. Set `DEBUG=False` in production settings
-2. Set `ALLOWED_HOSTS` with your domain
-3. Configure PostgreSQL database
-4. Set secure `SECRET_KEY`
-5. Configure static files (WhiteNoise)
-6. Set up SSL/HTTPS
-7. Configure logging
-8. Set up monitoring and error tracking
+1. Set `ALLOWED_HOSTS` with your domain
+2. Configure PostgreSQL database
+3. Set secure `SECRET_KEY`
+4. Configure static files (WhiteNoise)
+5. Set up SSL/HTTPS
+6. Configure logging
+7. Set up monitoring and error tracking
 
 ### Using Docker in Production
 
@@ -404,14 +405,21 @@ docker-compose -f docker-compose.yml up -d
 ### Environment Variables for Production
 
 ```env
+# Django Settings
 SECRET_KEY=<strong-secret-key>
-DEBUG=False
 ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
-DB_NAME=library_db
-DB_USER=postgres
+DB_NAME=book_library_liberium
+DB_USER=liberium_user
 DB_PASSWORD=<secure-password>
-DB_HOST=db
+DB_HOST=<host-name>
 DB_PORT=5432
+
+# Database Settings
+POSTGRES_DB=book_library_liberium
+POSTGRES_USER=liberium_user
+POSTGRES_PASSWORD=<secure-password>
+
+# Production Settings
 SECURE_SSL_REDIRECT=True
 ```
 
@@ -455,24 +463,9 @@ curl -X POST http://localhost:8000/books/1/return/ \
   -H "Authorization: Bearer <access_token>"
 ```
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Run tests (`make test`)
-5. Format code (`make format`)
-6. Commit changes (`git commit -m 'Add amazing feature'`)
-7. Push to branch (`git push origin feature/amazing-feature`)
-8. Open a Pull Request
-
 ## 📝 License
 
 This project is licensed under the MIT License.
-
-## 👥 Authors
-
-- Your Name - Initial work
 
 ## 🙏 Acknowledgments
 
@@ -480,10 +473,6 @@ This project is licensed under the MIT License.
 - djangorestframework-simplejwt
 - drf-yasg for API documentation
 - All contributors and open-source libraries used
-
-## 📞 Support
-
-For support, please open an issue in the GitHub repository.
 
 ## 🔗 Links
 
