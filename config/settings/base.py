@@ -78,9 +78,6 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
-print(BASE_DIR)
-print(os.getenv("DB_NAME", "library_db"))
-print(os.getenv("DB_HOST", "localhost"))
 
 # Custom User Model
 AUTH_USER_MODEL = "users.User"
@@ -128,6 +125,14 @@ REST_FRAMEWORK = {
         "rest_framework.filters.OrderingFilter",
     ),
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "100/hour",
+        "user": "1000/hour",
+    },
 }
 
 # JWT Configuration
